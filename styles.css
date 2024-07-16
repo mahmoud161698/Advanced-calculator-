@@ -9,6 +9,12 @@ body {
     align-items: center;
     min-height: 100vh;
     color: #333;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #fff;
 }
 
 h1 {
@@ -18,6 +24,11 @@ h1 {
     background: rgba(255, 255, 255, 0.8);
     padding: 10px;
     border-radius: 8px;
+}
+
+body.dark-mode h1 {
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
 }
 
 @keyframes fadeIn {
@@ -35,19 +46,30 @@ h1 {
     margin-top: 20px;
 }
 
+body.dark-mode #calculator {
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
 label {
     display: block;
     margin: 10px 0;
     font-size: 18px;
 }
 
-input[type="date"], textarea {
+input[type="date"], input[type="time"], textarea {
     width: calc(100% - 20px);
     padding: 8px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-bottom: 10px;
+}
+
+body.dark-mode input[type="date"], body.dark-mode input[type="time"], body.dark-mode textarea {
+    background-color: #333;
+    color: #fff;
+    border-color: #555;
 }
 
 textarea {
@@ -71,11 +93,23 @@ button:hover {
     background-color: #45a049;
 }
 
+body.dark-mode button {
+    background-color: #4CAF50;
+}
+
+body.dark-mode button:hover {
+    background-color: #45a049;
+}
+
 #result, #zodiacResult, #customAdvice {
     margin-top: 20px;
     font-size: 18px;
     color: #333;
     animation: slideIn 1s;
+}
+
+body.dark-mode #result, body.dark-mode #zodiacResult, body.dark-mode #customAdvice {
+    color: #fff;
 }
 
 @keyframes slideIn {
@@ -95,11 +129,68 @@ th, td {
     text-align: right;
 }
 
+body.dark-mode th, body.dark-mode td {
+    border-color: #555;
+}
+
 th {
     background-color: #4CAF50;
     color: white;
 }
 
+body.dark-mode th {
+    background-color: #4CAF50;
+}
+
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
+
+body.dark-mode tr:nth-child(even) {
+    background-color: #333;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.options button {
+    background-color: #007BFF;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.options button:hover {
+    background-color: #0056b3;
+}
+
+.hidden {
+    display: none;
+}
+
+.toggle-dark-mode {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .toggle-dark-mode {
+    color: #fff;
+}
+
+.toggle-dark-mode:hover {
+    color: #555;
+}
+
+body.dark-mode .toggle-dark-mode:hover {
+    color: #ccc;
+        }
