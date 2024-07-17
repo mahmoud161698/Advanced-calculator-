@@ -180,7 +180,7 @@ body.dark-mode tr:nth-child(even) {
     font-size: 24px;
     cursor: pointer;
     color: #333;
-    transition: color 0.3s ease, transform 0.3s ease;
+    transition: color 0.3s ease;
     outline: none;
 }
 
@@ -190,22 +190,8 @@ body.dark-mode .toggle-dark-mode {
 
 .toggle-dark-mode:hover {
     color: #555;
-    transform: scale(1.1);
 }
 
 body.dark-mode .toggle-dark-mode:hover {
     color: #ccc;
-    transform: scale(1.1);
 }
-
-.sun, .moon {
-    display: none;
-}
-
-body:not(.dark-mode) .sun {
-    display: inline;
-}
-
-body.dark-mode .moon {
-    display: inline;
-    }
