@@ -125,33 +125,40 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0); /* Completely transparent background */
+}
+
+body.dark-mode table {
+    background-color: rgba(0, 0, 0, 0); /* Completely transparent background in dark mode */
 }
 
 th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: right;
+    background-color: rgba(255, 255, 255, 0); /* Completely transparent background */
 }
 
 body.dark-mode th, body.dark-mode td {
     border-color: #555;
+    background-color: rgba(0, 0, 0, 0); /* Completely transparent background in dark mode */
 }
 
 th {
-    background-color: #4CAF50;
+    background-color: rgba(76, 175, 80, 0.8); /* Semi-transparent green background */
     color: white;
 }
 
 body.dark-mode th {
-    background-color: #4CAF50;
+    background-color: rgba(76, 175, 80, 0.8); /* Semi-transparent green background in dark mode */
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: rgba(242, 242, 242, 0.5); /* Semi-transparent light gray background */
 }
 
 body.dark-mode tr:nth-child(even) {
-    background-color: #333;
+    background-color: rgba(51, 51, 51, 0.5); /* Semi-transparent dark gray background in dark mode */
 }
 
 .options {
@@ -197,4 +204,4 @@ body.dark-mode .toggle-dark-mode {
 
 body.dark-mode .toggle-dark-mode:hover {
     color: #ccc;
-}
+                           }
