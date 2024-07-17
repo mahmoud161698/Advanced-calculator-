@@ -124,6 +124,17 @@ function updateResultTable(tableId, key, value) {
     }
 }
 
+function updateResultTable(tableId, key, value) {
+    var table = document.getElementById(tableId);
+    table.style.display = 'table';
+    
+    var cellId = key.replace(/\s+/g, ''); // Remove spaces to form a valid ID
+    var cell = document.getElementById(cellId);
+    if (cell) {
+        cell.textContent = value;
+    }
+}
+
 function updateAge() {
     var today = new Date();
     var ageMilliseconds = today - birthdate;
