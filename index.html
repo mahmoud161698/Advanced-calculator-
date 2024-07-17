@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة العمر وتوقع البرج مع نصائح مخصصة - محمود مطراوي</title>
+    <title>حاسبة العمر المتقدمة وتوقع البرج مع نصائح مخصصة - محمود مطراوي</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <button class="toggle-dark-mode" onclick="toggleDarkMode()">🌙</button>
     <div id="calculator">
-        <h1>حاسبة العمر /h1>
+        <h1>حاسبة العمر المتقدمة</h1>
         <div class="options">
             <button onclick="showSection('age')">احسب العمر</button>
             <button onclick="showSection('zodiac')">أنت والنجوم</button>
@@ -27,6 +27,34 @@
                     <th>المعلومة</th>
                     <th>القيمة</th>
                 </tr>
+                <tr>
+                    <td>العمر بالسنوات</td>
+                    <td id="ageInYears"></td>
+                </tr>
+                <tr>
+                    <td>العمر بالأشهر</td>
+                    <td id="ageInMonths"></td>
+                </tr>
+                <tr>
+                    <td>العمر بالأسابيع</td>
+                    <td id="ageInWeeks"></td>
+                </tr>
+                <tr>
+                    <td>العمر بالأيام</td>
+                    <td id="ageInDays"></td>
+                </tr>
+                <tr>
+                    <td>العمر بالساعات</td>
+                    <td id="ageInHours"></td>
+                </tr>
+                <tr>
+                    <td>العمر بالدقائق</td>
+                    <td id="ageInMinutes"></td>
+                </tr>
+                <tr>
+                    <td>العمر بالثواني</td>
+                    <td id="ageInSeconds"></td>
+                </tr>
             </table>
         </div>
         <div id="zodiacSection" class="section hidden">
@@ -41,6 +69,9 @@
             </table>
         </div>
     </div>
+    <footer>
+        <p>تم تطوير هذا الموقع بواسطة Mahmoud Matrawy</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
