@@ -37,7 +37,7 @@ body.dark-mode h1 {
 }
 
 #calculator {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0); /* يجعل الخلفية شفافة تمامًا */
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -47,7 +47,7 @@ body.dark-mode h1 {
 }
 
 body.dark-mode #calculator {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0); /* يجعل الخلفية شفافة تمامًا في الوضع الداكن */
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
@@ -181,7 +181,6 @@ body.dark-mode tr:nth-child(even) {
     cursor: pointer;
     color: #333;
     transition: color 0.3s ease;
-    outline: none;
 }
 
 body.dark-mode .toggle-dark-mode {
@@ -194,4 +193,4 @@ body.dark-mode .toggle-dark-mode {
 
 body.dark-mode .toggle-dark-mode:hover {
     color: #ccc;
-}
+    }
