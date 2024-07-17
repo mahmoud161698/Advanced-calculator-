@@ -59,6 +59,11 @@ label {
     display: block;
     margin: 10px 0;
     font-size: 18px;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); /* Subtle white text shadow */
+}
+
+body.dark-mode label {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle black text shadow for dark mode */
 }
 
 input[type="date"], input[type="time"], textarea {
@@ -68,12 +73,16 @@ input[type="date"], input[type="time"], textarea {
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+    color: #333;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); /* Subtle white text shadow */
 }
 
 body.dark-mode input[type="date"], body.dark-mode input[type="time"], body.dark-mode textarea {
-    background-color: #333;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background in dark mode */
     color: #fff;
     border-color: #555;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle black text shadow for dark mode */
 }
 
 textarea {
@@ -91,6 +100,7 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle black text shadow */
 }
 
 button:hover {
@@ -110,10 +120,12 @@ body.dark-mode button:hover {
     font-size: 18px;
     color: #333;
     animation: slideIn 1s;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); /* Subtle white text shadow */
 }
 
 body.dark-mode #result, body.dark-mode #zodiacResult, body.dark-mode #customAdvice {
     color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle black text shadow for dark mode */
 }
 
 @keyframes slideIn {
@@ -137,11 +149,13 @@ th, td {
     padding: 8px;
     text-align: right;
     background-color: rgba(255, 255, 255, 0); /* Completely transparent background */
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); /* Subtle white text shadow */
 }
 
 body.dark-mode th, body.dark-mode td {
     border-color: #555;
     background-color: rgba(0, 0, 0, 0); /* Completely transparent background in dark mode */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle black text shadow for dark mode */
 }
 
 th {
@@ -204,4 +218,4 @@ body.dark-mode .toggle-dark-mode {
 
 body.dark-mode .toggle-dark-mode:hover {
     color: #ccc;
-}
+    }
