@@ -102,6 +102,17 @@ function updateResultTable(tableId, key, value) {
     }
 }
 
+function updateResultTable(tableId, key, value) {
+    var table = document.getElementById(tableId);
+    table.style.display = 'table';
+    
+    var cellId = key.replace(/\s+/g, ''); // Remove spaces to form a valid ID
+    var cell = document.getElementById(cellId);
+    if (cell) {
+        cell.textContent = value;
+    }
+}
+
 function updateAge() {
     var today = new Date();
     var ageMilliseconds = today - birthdate;
@@ -142,13 +153,11 @@ function updateAge() {
     var days = daysDifference % 7;
 
     // Update the result table with the new calculations
-    updateResultTable('ageResultTable', 'العمر بالسنوات', `${years} سنة`);
+    updateResultTable('ageResultTable', 'عمرك', `${years} سنة و ${months} أشهر و ${weeks} أسابيع و ${days} أيام و ${hours} ساعات و ${minutes} دقائق`);
     updateResultTable('ageResultTable', 'العمر بالأشهر', `${years * 12 + months} أشهر`);
     updateResultTable('ageResultTable', 'العمر بالأسابيع', `${Math.floor(ageDays / 7)} أسابيع`);
     updateResultTable('ageResultTable', 'العمر بالأيام', `${ageDays} أيام`);
-    updateResultTable('ageResultTable', 'العمر بالساعات', `${ageHours} ساعات`);
     updateResultTable('ageResultTable', 'العمر بالدقائق', `${ageMinutes} دقائق`);
-    updateResultTable('ageResultTable', 'العمر بالثواني', `${ageSeconds} ثواني`);
 }
 
 function calculateNextBirthday() {
