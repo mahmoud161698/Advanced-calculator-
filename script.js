@@ -487,12 +487,15 @@ function playTieSound() {
     }
 }
 
-// Function to show the Tik Tak Toe game
-function showTikTakToe() {
-    document.getElementById('tikTakToeContainer').style.display = 'flex';
+// Function to toggle the visibility of the Tik Tak Toe game
+function toggleTikTakToe() {
+    const tikTakToeContainer = document.getElementById('tikTakToeContainer');
+    if (tikTakToeContainer.style.display === 'none' || tikTakToeContainer.style.display === '') {
+        tikTakToeContainer.style.display = 'flex';
+    } else {
+        tikTakToeContainer.style.display = 'none';
+    }
 }
 
-// Function to hide the Tik Tak Toe game
-function hideTikTakToe() {
-    document.getElementById('tikTakToeContainer').style.display = 'none';
-        }
+// Add event listener to the button with id 'tikTakButton'
+document.getElementById('tikTakButton').addEventListener('click', toggleTikTakToe);
