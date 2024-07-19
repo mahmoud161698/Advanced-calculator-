@@ -14,7 +14,7 @@
             <button onclick="showSection('age')">احسب العمر</button>
             <button onclick="showSection('zodiac')">أنت والنجوم</button>
             <button onclick="contactDeveloper()">تواصل معنا</button>
-            <button>Tik Tak</button>
+            <button id="tikTakButton" onclick="toggleTikTakToe()">Tik Tak</button>
         </div>
         <div id="ageSection" class="section hidden">
             <label for="birthdate">تاريخ الميلاد:</label>
@@ -61,10 +61,13 @@
                 </tr>
             </table>
         </div>
+        <div id="tikTakToeContainer" style="display: none;">
+            <!-- Your Tik Tak Toe game HTML goes here -->
+        </div>
     </div>
     <footer>
         <p>تم تطوير هذا الموقع بواسطة Mahmoud Matrawy</p>
     </footer>
     <script src="script.js"></script>
 </body>
-        </html>
+</html>
