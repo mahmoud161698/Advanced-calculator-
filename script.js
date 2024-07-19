@@ -1,3 +1,4 @@
+// JavaScript code for the website
 var birthdate;
 var birthtime;
 var intervalId;
@@ -102,39 +103,6 @@ function updateResultTable(tableId, key, value) {
     }
 }
 
-function updateResultTable(tableId, key, value) {
-    var table = document.getElementById(tableId);
-    table.style.display = 'table';
-    
-    var cellId = key.replace(/\s+/g, ''); // Remove spaces to form a valid ID
-    var cell = document.getElementById(cellId);
-    if (cell) {
-        cell.textContent = value;
-    }
-}
-
-function updateResultTable(tableId, key, value) {
-    var table = document.getElementById(tableId);
-    table.style.display = 'table';
-    
-    var cellId = key.replace(/\s+/g, ''); // Remove spaces to form a valid ID
-    var cell = document.getElementById(cellId);
-    if (cell) {
-        cell.textContent = value;
-    }
-}
-
-function updateResultTable(tableId, key, value) {
-    var table = document.getElementById(tableId);
-    table.style.display = 'table';
-    
-    var cellId = key.replace(/\s+/g, ''); // Remove spaces to form a valid ID
-    var cell = document.getElementById(cellId);
-    if (cell) {
-        cell.textContent = value;
-    }
-}
-
 function updateAge() {
     var today = new Date();
     var ageMilliseconds = today - birthdate;
@@ -190,6 +158,7 @@ function updateAge() {
     updateResultTable('ageResultTable', 'العمر بالدقائق', `${Math.floor(ageMilliseconds / (1000 * 60))} دقائق`);
     updateResultTable('ageResultTable', 'العمر بالثواني', `${Math.floor(ageMilliseconds / 1000)} ثواني`);
 }
+
 function calculateNextBirthday() {
     var today = new Date();
     var nextBirthday = new Date(today.getFullYear(), birthdate.getMonth(), birthdate.getDate());
@@ -322,4 +291,208 @@ function getCustomAdvice(age) {
     } else {
         return "استمتع بوقتك مع العائلة والأحفاد. شارك خبراتك وحكمتك مع الآخرين.";
     }
+}
+
+// JavaScript code for the Tik Tak Toe game
+const cells = document.querySelectorAll('.tik-tak-toe-cell');
+const playerScoreElem = document.getElementById('player-score');
+const computerScoreElem = document.getElementById('computer-score');
+const tieScoreElem = document.getElementById('tie-score');
+const restartBtn = document.getElementById('restart-btn');
+const soundBtn = document.getElementById('sound-btn');
+
+let board = ['', '', '', '', '', '', '', '', ''];
+let currentPlayer = 'X';
+let scores = { player: 0, computer: 0, tie: 0 };
+let isSoundOn = true;
+
+const winningCombinations = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+];
+
+// Audio elements
+const placeSound = new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg');
+const winSound = new Audio('https://freesound.org/people/DeletedUser1115286/sounds/455921/download/455921__deleteduser1115286__success-fanfare-trumpets.mp3');
+const tieSound = new Audio('https://freesound.org/people/ProjectsU012/sounds/341695/download/341695__projectsu012__retro-game-over.wav');
+
+cells.forEach(cell => cell.addEventListener('click', handlePlayerMove));
+restartBtn.addEventListener('click', restartGame);
+soundBtn.addEventListener('click', toggleSound);
+
+function handlePlayerMove(event) {
+    const index = event.target.getAttribute('data-index');
+    if (board[index] !== '' || checkWin() || checkTie()) return;
+    board[index] = currentPlayer;
+    event.target.textContent = currentPlayer;
+    event.target.classList.add('played', currentPlayer.toLowerCase());
+    playPlaceSound(); // Play sound when a move is placed
+
+    if (checkWin()) {
+        updateScore('player');
+        playWinSound(); // Play win sound
+        return;
+    }
+    if (checkTie()) {
+        updateScore('tie');
+        playTieSound(); // Play tie sound
+        return;
+    }
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    setTimeout(computerMove, 500);  // Adding delay for better UX
+}
+
+function computerMove() {
+    let bestScore = -Infinity;
+    let move;
+    for (let i = 0; i < board.length; i++) {
+        if (board[i] === '') {
+            board[i] = 'O';
+            let score = minimax(board, 0, false);
+            board[i] = '';
+            if (score > bestScore) {
+                bestScore = score;
+                move = i;
+            }
+        }
+    }
+    board[move] = 'O';
+    updateBoard(move, 'O');
+    if (checkWin()) {
+        updateScore('computer');
+        playWinSound(); // Play win sound
+        return;
+    }
+    if (checkTie()) {
+        updateScore('tie');
+        playTieSound(); // Play tie sound
+        return;
+    }
+    currentPlayer = 'X';
+}
+
+function minimax(board, depth, isMaximizing) {
+    let result = checkWinner();
+    if (result !== null) {
+        return result === 'tie' ? 0 : result === 'X' ? -1 : 1;
+    }
+
+    if (isMaximizing) {
+        let bestScore = -Infinity;
+        for (let i = 0; i < board.length; i++) {
+            if (board[i] === '') {
+                board[i] = 'O';
+                let score = minimax(board, depth + 1, false);
+                board[i] = '';
+                bestScore = Math.max(score, bestScore);
+            }
+        }
+        return bestScore;
+    } else {
+        let bestScore = Infinity;
+        for (let i = 0; i < board.length; i++) {
+            if (board[i] === '') {
+                board[i] = 'X';
+                let score = minimax(board, depth + 1, true);
+                board[i] = '';
+                bestScore = Math.min(score, bestScore);
+            }
+        }
+        return bestScore;
+    }
+}
+
+function updateBoard(index, player) {
+    cells[index].textContent = player;
+    cells[index].classList.add('played', player.toLowerCase(), 'animate'); // Add 'animate' class
+    // Ensure the transition triggers smoothly
+    setTimeout(() => {
+        cells[index].classList.remove('played', player.toLowerCase(), 'animate'); // Remove 'animate' class after animation
+    }, 300); // Adjust timing to match animation duration
+}
+
+function checkWin() {
+    return winningCombinations.some(combination => {
+        return combination.every(index => {
+            return board[index] === currentPlayer;
+        });
+    });
+}
+
+function checkTie() {
+    return board.every(cell => cell !== '');
+}
+
+function checkWinner() {
+    for (let combination of winningCombinations) {
+        const [a, b, c] = combination;
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+            return board[a];
+        }
+    }
+    return board.includes('') ? null : 'tie';
+}
+
+function updateScore(winner) {
+    if (winner === 'player') {
+        scores.player++;
+        playerScoreElem.textContent = scores.player;
+    } else if (winner === 'computer') {
+        scores.computer++;
+        computerScoreElem.textContent = scores.computer;
+    } else {
+        scores.tie++;
+        tieScoreElem.textContent = scores.tie;
+    }
+}
+
+function restartGame() {
+    board = ['', '', '', '', '', '', '', '', ''];
+    cells.forEach(cell => {
+        cell.textContent = '';
+        cell.classList.remove('played', 'x', 'o');
+    });
+    currentPlayer = 'X';
+}
+
+function toggleSound() {
+    isSoundOn = !isSoundOn;
+    soundBtn.textContent = `Sound: ${isSoundOn ? 'On' : 'Off'}`;
+}
+
+function playPlaceSound() {
+    if (isSoundOn) {
+        placeSound.currentTime = 0; // Reset sound to start
+        placeSound.play();
+    }
+}
+
+function playWinSound() {
+    if (isSoundOn) {
+        winSound.currentTime = 0; // Reset sound to start
+        winSound.play();
+    }
+}
+
+function playTieSound() {
+    if (isSoundOn) {
+        tieSound.currentTime = 0; // Reset sound to start
+        tieSound.play();
+    }
+}
+
+// Function to show the Tik Tak Toe game
+function showTikTakToe() {
+    document.getElementById('tikTakToeContainer').style.display = 'flex';
+}
+
+// Function to hide the Tik Tak Toe game
+function hideTikTakToe() {
+    document.getElementById('tikTakToeContainer').style.display = 'none';
         }
