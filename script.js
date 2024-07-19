@@ -1,4 +1,3 @@
-// JavaScript code for the website
 var birthdate;
 var birthtime;
 var intervalId;
