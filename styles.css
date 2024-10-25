@@ -38,7 +38,7 @@ body.dark-mode h1 {
     to { opacity: 1; }
 }
 
-#calculator {
+#mainPage, .section {
     background-color: rgba(255, 255, 255, 0); /* Completely transparent background */
     border-radius: 8px;
     box-shadow: none; /* Removed shadow for full transparency */
@@ -50,7 +50,7 @@ body.dark-mode h1 {
     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); /* Subtle white text shadow */
 }
 
-body.dark-mode #calculator {
+body.dark-mode #mainPage, body.dark-mode .section {
     background-color: rgba(0, 0, 0, 0); /* Completely transparent background in dark mode */
     box-shadow: none;
     color: #fff; /* Lighter text color for dark mode */
@@ -220,4 +220,18 @@ body.dark-mode .toggle-dark-mode {
 
 body.dark-mode .toggle-dark-mode:hover {
     color: #ccc;
-    }
+}
+
+.backButton {
+    background-color: #FF4D4D;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.backButton:hover {
+    background-color: #FF3333;
+}
