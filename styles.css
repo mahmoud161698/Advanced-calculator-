@@ -6,6 +6,12 @@ body {
     background-position: center;
     padding: 20px;
     color: white; /* تغيير لون النص ليكون مرئيًا على الخلفية */
+    transition: background-color 0.5s, color 0.5s;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #fff;
 }
 
 h1 {
@@ -283,4 +289,4 @@ body.dark-mode .toggle-dark-mode:hover {
 
 .backButton:hover {
     background-color: #FF3333;
-}
+    }
