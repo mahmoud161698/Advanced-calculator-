@@ -335,4 +335,15 @@ function share(platform) {
         url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(result)}&url=${encodeURIComponent(window.location.href)}`;
     }
     window.open(url, '_blank');
-        }
+}
+
+// Welcome Screen Animation
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        document.getElementById('welcomeScreen').style.opacity = '0';
+        setTimeout(function() {
+            document.getElementById('welcomeScreen').style.display = 'none';
+            document.getElementById('mainPage').classList.remove('hidden');
+        }, 1000);
+    }, 3000);
+});
