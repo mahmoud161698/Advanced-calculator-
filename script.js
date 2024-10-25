@@ -57,6 +57,7 @@ const zodiacSigns = {
 function showSection(section) {
     document.getElementById('ageSection').classList.add('hidden');
     document.getElementById('zodiacSection').classList.add('hidden');
+    document.getElementById('loveSection').classList.add('hidden');
     document.getElementById(section + 'Section').classList.remove('hidden');
 }
 
@@ -292,209 +293,38 @@ function getCustomAdvice(age) {
     }
 }
 
-// JavaScript code for the Tik Tak Toe game
-const cells = document.querySelectorAll('.tik-tak-toe-cell');
-const playerScoreElem = document.getElementById('player-score');
-const computerScoreElem = document.getElementById('computer-score');
-const tieScoreElem = document.getElementById('tie-score');
-const restartBtn = document.getElementById('restart-btn');
-const soundBtn = document.getElementById('sound-btn');
-
-let board = ['', '', '', '', '', '', '', '', ''];
-let currentPlayer = 'X';
-let scores = { player: 0, computer: 0, tie: 0 };
-let isSoundOn = true;
-
-const winningCombinations = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-];
-
-// Audio elements
-const placeSound = new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg');
-const winSound = new Audio('https://freesound.org/people/DeletedUser1115286/sounds/455921/download/455921__deleteduser1115286__success-fanfare-trumpets.mp3');
-const tieSound = new Audio('https://freesound.org/people/ProjectsU012/sounds/341695/download/341695__projectsu012__retro-game-over.wav');
-
-cells.forEach(cell => cell.addEventListener('click', handlePlayerMove));
-restartBtn.addEventListener('click', restartGame);
-soundBtn.addEventListener('click', toggleSound);
-
-function handlePlayerMove(event) {
-    const index = event.target.getAttribute('data-index');
-    if (board[index] !== '' || checkWin() || checkTie()) return;
-    board[index] = currentPlayer;
-    event.target.textContent = currentPlayer;
-    event.target.classList.add('played', currentPlayer.toLowerCase());
-    playPlaceSound(); // Play sound when a move is placed
-
-    if (checkWin()) {
-        updateScore('player');
-        playWinSound(); // Play win sound
-        return;
-    }
-    if (checkTie()) {
-        updateScore('tie');
-        playTieSound(); // Play tie sound
-        return;
-    }
-    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-    setTimeout(computerMove, 500);  // Adding delay for better UX
-}
-
-function computerMove() {
-    let bestScore = -Infinity;
-    let move;
-    for (let i = 0; i < board.length; i++) {
-        if (board[i] === '') {
-            board[i] = 'O';
-            let score = minimax(board, 0, false);
-            board[i] = '';
-            if (score > bestScore) {
-                bestScore = score;
-                move = i;
-            }
-        }
-    }
-    board[move] = 'O';
-    updateBoard(move, 'O');
-    if (checkWin()) {
-        updateScore('computer');
-        playWinSound(); // Play win sound
-        return;
-    }
-    if (checkTie()) {
-        updateScore('tie');
-        playTieSound(); // Play tie sound
-        return;
-    }
-    currentPlayer = 'X';
-}
-
-function minimax(board, depth, isMaximizing) {
-    let result = checkWinner();
-    if (result !== null) {
-        return result === 'tie' ? 0 : result === 'X' ? -1 : 1;
-    }
-
-    if (isMaximizing) {
-        let bestScore = -Infinity;
-        for (let i = 0; i < board.length; i++) {
-            if (board[i] === '') {
-                board[i] = 'O';
-                let score = minimax(board, depth + 1, false);
-                board[i] = '';
-                bestScore = Math.max(score, bestScore);
-            }
-        }
-        return bestScore;
+// قياس الحب
+function calculateLove() {
+    const name1 = document.getElementById('name1').value;
+    const name2 = document.getElementById('name2').value;
+    
+    if (name1 && name2) {
+        const lovePercentage = Math.floor(Math.random() * 101);
+        let message = getLoveMessage(lovePercentage);
+        document.getElementById('result').innerHTML = `نسبة الحب بين ${name1} و ${name2} هي: ${lovePercentage}%<br>${message}`;
+        document.getElementById('shareButtons').style.display = 'block';
     } else {
-        let bestScore = Infinity;
-        for (let i = 0; i < board.length; i++) {
-            if (board[i] === '') {
-                board[i] = 'X';
-                let score = minimax(board, depth + 1, true);
-                board[i] = '';
-                bestScore = Math.min(score, bestScore);
-            }
-        }
-        return bestScore;
+        alert("الرجاء إدخال الاسمين!");
     }
 }
 
-function updateBoard(index, player) {
-    cells[index].textContent = player;
-    cells[index].classList.add('played', player.toLowerCase(), 'animate'); // Add 'animate' class
-    // Ensure the transition triggers smoothly
-    setTimeout(() => {
-        cells[index].classList.remove('played', player.toLowerCase(), 'animate'); // Remove 'animate' class after animation
-    }, 300); // Adjust timing to match animation duration
-}
-
-function checkWin() {
-    return winningCombinations.some(combination => {
-        return combination.every(index => {
-            return board[index] === currentPlayer;
-        });
-    });
-}
-
-function checkTie() {
-    return board.every(cell => cell !== '');
-}
-
-function checkWinner() {
-    for (let combination of winningCombinations) {
-        const [a, b, c] = combination;
-        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-            return board[a];
-        }
-    }
-    return board.includes('') ? null : 'tie';
-}
-
-function updateScore(winner) {
-    if (winner === 'player') {
-        scores.player++;
-        playerScoreElem.textContent = scores.player;
-    } else if (winner === 'computer') {
-        scores.computer++;
-        computerScoreElem.textContent = scores.computer;
+function getLoveMessage(percentage) {
+    if (percentage < 50) {
+        return "غير يسطا العلاقه دي مش نافعة 😂";
+    } else if (percentage < 80) {
+        return "العب يا برعي يا خاربها 😂";
     } else {
-        scores.tie++;
-        tieScoreElem.textContent = scores.tie;
+        return "اوبا! يا مقطع السمكة وديلها 😂";
     }
 }
 
-function restartGame() {
-    board = ['', '', '', '', '', '', '', '', ''];
-    cells.forEach(cell => {
-        cell.textContent = '';
-        cell.classList.remove('played', 'x', 'o');
-    });
-    currentPlayer = 'X';
-}
-
-function toggleSound() {
-    isSoundOn = !isSoundOn;
-    soundBtn.textContent = `Sound: ${isSoundOn ? 'On' : 'Off'}`;
-}
-
-function playPlaceSound() {
-    if (isSoundOn) {
-        placeSound.currentTime = 0; // Reset sound to start
-        placeSound.play();
+function share(platform) {
+    const result = document.getElementById('result').innerText;
+    let url = '';
+    if (platform === 'facebook') {
+        url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(result)}`;
+    } else if (platform === 'twitter') {
+        url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(result)}&url=${encodeURIComponent(window.location.href)}`;
     }
-}
-
-function playWinSound() {
-    if (isSoundOn) {
-        winSound.currentTime = 0; // Reset sound to start
-        winSound.play();
-    }
-}
-
-function playTieSound() {
-    if (isSoundOn) {
-        tieSound.currentTime = 0; // Reset sound to start
-        tieSound.play();
-    }
-}
-
-// Function to toggle the visibility of the Tik Tak Toe game
-function toggleTikTakToe() {
-    const tikTakToeContainer = document.getElementById('tikTakToeContainer');
-    if (tikTakToeContainer.style.display === 'none' || tikTakToeContainer.style.display === '') {
-        tikTakToeContainer.style.display = 'flex';
-    } else {
-        tikTakToeContainer.style.display = 'none';
-    }
-}
-
-// Add event listener to the button with id 'tikTakButton'
-document.getElementById('tikTakButton').addEventListener('click', toggleTikTakToe);
+    window.open(url, '_blank');
+        }
