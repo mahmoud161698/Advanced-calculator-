@@ -6,8 +6,14 @@
     <title>موقع متعدد الوظائف - محمود مطراوي</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <div id="mainPage">
+<body class="dark-mode">
+    <div id="welcomeScreen">
+        <h1 id="welcomeText">Welcome to Elmatrawy home</h1>
+        <div id="portal"></div>
+    </div>
+
+    <button class="toggle-dark-mode" onclick="toggleDarkMode()">🌙</button>
+    <div id="mainPage" class="hidden">
         <h1>موقع متعدد الوظائف</h1>
         <div class="options">
             <button onclick="loadSection('age')">احسب العمر</button>
@@ -102,4 +108,4 @@
     </footer>
     <script src="script.js"></script>
 </body>
-                                         </html>
+    </html>
