@@ -54,11 +54,19 @@ const zodiacSigns = {
     }
 };
 
-function showSection(section) {
+function loadSection(section) {
+    document.getElementById('mainPage').classList.add('hidden');
     document.getElementById('ageSection').classList.add('hidden');
     document.getElementById('zodiacSection').classList.add('hidden');
     document.getElementById('loveSection').classList.add('hidden');
     document.getElementById(section + 'Section').classList.remove('hidden');
+}
+
+function goBack() {
+    document.getElementById('mainPage').classList.remove('hidden');
+    document.getElementById('ageSection').classList.add('hidden');
+    document.getElementById('zodiacSection').classList.add('hidden');
+    document.getElementById('loveSection').classList.add('hidden');
 }
 
 function calculateAge() {
