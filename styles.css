@@ -1,5 +1,3 @@
-/* styles.css */
-
 body {
     font-family: Arial, sans-serif;
     background: url('https://images.pexels.com/photos/3778997/pexels-photo-3778997.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center fixed;
@@ -222,55 +220,4 @@ body.dark-mode .toggle-dark-mode {
 
 body.dark-mode .toggle-dark-mode:hover {
     color: #ccc;
-}
-
-/* New styles for the Tik Tak Toe game */
-.tik-tak-toe-container {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.tik-tak-toe-board {
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
-    gap: 3px;
-    margin-bottom: 20px;
-    background-color: white;
-}
-
-.tik-tak-toe-cell {
-    width: 100px;
-    height: 100px;
-    background-color: black;
-    color: white;
-    font-size: 5em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.tik-tak-toe-button {
-    background-color: white;
-    color: black;
-    border: none;
-    padding: 12px 40px;
-    cursor: pointer;
-    margin: 5px;
-    border-radius: 40px;
-    font-size: 15px;
-}
-
-.tik-tak-toe-button:hover {
-    background-color: gray;
-                                  }
+    }
