@@ -335,4 +335,4 @@ function share(platform) {
         url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(result)}&url=${encodeURIComponent(window.location.href)}`;
     }
     window.open(url, '_blank');
-        }
+            }
