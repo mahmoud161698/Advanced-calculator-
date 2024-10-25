@@ -78,15 +78,22 @@
 
     <div id="loveSection" class="section hidden">
         <button class="backButton" onclick="goBack()">رجوع</button>
-        <h1>قياس الحب</h1>
+        <h1>مقياس الحب الخارق</h1>
+        <div id="heart">❤️</div>
+        <h2>اكتشف نسبة الحب بينكما!</h2>
         <input type="text" id="name1" placeholder="الاسم الأول">
         <input type="text" id="name2" placeholder="الاسم الثاني">
         <br>
         <button onclick="calculateLove()">احسب نسبة الحب!</button>
         <div id="result"></div>
-        <div id="shareButtons" style="display: none;">
+        <div id="shareButtons">
             <button class="shareBtn" onclick="share('facebook')">شارك على Facebook</button>
             <button class="shareBtn" onclick="share('twitter')">شارك على Twitter</button>
+        </div>
+        <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+        <audio id="resultSound" src="https://www.soundjay.com/misc/sounds/magic-chime-01.mp3"></audio>
+        <div class="programmer-message">
+            <p>تم برمجة الموقع بواسطة Mahmoud Matrawy</p>
         </div>
     </div>
 
@@ -95,4 +102,4 @@
     </footer>
     <script src="script.js"></script>
 </body>
-</html>
+    </html>
