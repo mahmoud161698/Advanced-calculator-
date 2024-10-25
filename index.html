@@ -13,8 +13,8 @@
         <div class="options">
             <button onclick="showSection('age')">احسب العمر</button>
             <button onclick="showSection('zodiac')">أنت والنجوم</button>
+            <button onclick="showSection('love')">قياس الحب</button>
             <button onclick="contactDeveloper()">تواصل معنا</button>
-            <button id="tikTakButton" onclick="toggleTikTakToe()">Tik Tak</button>
         </div>
         <div id="ageSection" class="section hidden">
             <label for="birthdate">تاريخ الميلاد:</label>
@@ -48,6 +48,14 @@
                     <td>العمر بالدقائق</td>
                     <td id="ageInMinutes"></td>
                 </tr>
+                <tr>
+                    <td>عيد ميلادك القادم</td>
+                    <td id="nextBirthday"></td>
+                </tr>
+                <tr>
+                    <td>نصيحة مخصصة</td>
+                    <td id="customAdvice"></td>
+                </tr>
             </table>
         </div>
         <div id="zodiacSection" class="section hidden">
@@ -61,8 +69,17 @@
                 </tr>
             </table>
         </div>
-        <div id="tikTakToeContainer" style="display: none;">
-            <!-- Your Tik Tak Toe game HTML goes here -->
+        <div id="loveSection" class="section hidden">
+            <h2>قياس الحب</h2>
+            <input type="text" id="name1" placeholder="الاسم الأول">
+            <input type="text" id="name2" placeholder="الاسم الثاني">
+            <br>
+            <button onclick="calculateLove()">احسب نسبة الحب!</button>
+            <div id="result"></div>
+            <div id="shareButtons" style="display: none;">
+                <button class="shareBtn" onclick="share('facebook')">شارك على Facebook</button>
+                <button class="shareBtn" onclick="share('twitter')">شارك على Twitter</button>
+            </div>
         </div>
     </div>
     <footer>
