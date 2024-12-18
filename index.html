@@ -26,6 +26,8 @@
             <button onclick="loadSection('age')" aria-label="احسب العمر">احسب العمر</button>
             <button onclick="loadSection('zodiac')" aria-label="أنت والنجوم">أنت والنجوم</button>
             <button onclick="loadSection('love')" aria-label="قياس الحب">قياس الحب</button>
+            <button onclick="loadSection('tictactoe')" aria-label="لعبة إكس أو">لعبة إكس أو</button>
+            <button onclick="loadSection('decisionWheel')" aria-label="عجلة القرارات">عجلة القرارات</button>
             <button onclick="contactDeveloper()" aria-label="تواصل معنا">تواصل معنا</button>
         </div>
     </div>
@@ -113,9 +115,38 @@
         </div>
     </div>
 
+    <!-- Tic-Tac-Toe Game Section -->
+    <div id="tictactoeSection" class="section hidden">
+        <button class="backButton" onclick="goBack()" aria-label="رجوع">رجوع</button>
+        <h1>لعبة إكس أو</h1>
+        <div class="game-settings">
+            <select id="difficulty" class="btn" onchange="setDifficulty(this.value)">
+                <option value="easy">سهل</option>
+                <option value="medium">متوسط</option>
+                <option value="hard">صعب</option>
+            </select>
+            <button class="btn" onclick="setGameMode('computer')">ضد الكمبيوتر</button>
+            <button class="btn" onclick="setGameMode('player')">لاعب × لاعب</button>
+        </div>
+        <div class="game-board" id="board"></div>
+        <div id="status">ابدأ اللعب</div>
+    </div>
+
+    <!-- Decision Wheel Section -->
+    <div id="decisionWheelSection" class="section hidden">
+        <button class="backButton" onclick="goBack()" aria-label="رجوع">رجوع</button>
+        <h1>عجلة القرارات</h1>
+        <div id="wheel-container">
+            <canvas id="wheel"></canvas>
+            <div id="spinner"></div>
+            <button id="spin-btn">دورة القرار</button>
+        </div>
+        <div id="result"></div>
+    </div>
+
     <footer>
         <p>تم تطوير هذا الموقع بواسطة Mahmoud Matrawy</p>
     </footer>
     <script src="script.js"></script>
 </body>
-    </html>
+            </html>
