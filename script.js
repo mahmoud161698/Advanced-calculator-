@@ -62,6 +62,8 @@ function loadSection(section) {
     document.getElementById('ageSection').classList.add('hidden');
     document.getElementById('zodiacSection').classList.add('hidden');
     document.getElementById('loveSection').classList.add('hidden');
+    document.getElementById('tictactoeSection').classList.add('hidden');
+    document.getElementById('decisionWheelSection').classList.add('hidden');
     
     const sectionElement = document.getElementById(section + 'Section');
     sectionElement.classList.remove('hidden');
@@ -76,12 +78,16 @@ function goBack() {
     document.getElementById('ageSection').classList.remove('show');
     document.getElementById('zodiacSection').classList.remove('show');
     document.getElementById('loveSection').classList.remove('show');
+    document.getElementById('tictactoeSection').classList.remove('show');
+    document.getElementById('decisionWheelSection').classList.remove('show');
     
     setTimeout(() => {
         document.getElementById('mainPage').classList.add('show');
         document.getElementById('ageSection').classList.add('hidden');
         document.getElementById('zodiacSection').classList.add('hidden');
         document.getElementById('loveSection').classList.add('hidden');
+        document.getElementById('tictactoeSection').classList.add('hidden');
+        document.getElementById('decisionWheelSection').classList.add('hidden');
     }, 10); // Small delay to ensure the animation is applied correctly
 }
 
@@ -372,3 +378,276 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
     }, 3000);
 });
+
+// Tic-Tac-Toe Game Logic
+let board = ['','','','','','','','',''];
+let currentPlayer = 'X';
+let gameMode = 'player';
+let difficulty = 'easy';
+let gameActive = true;
+
+const winPatterns = [
+    [0,1,2], [3,4,5], [6,7,8],  // صفوف
+    [0,3,6], [1,4,7], [2,5,8],  // أعمدة
+    [0,4,8], [2,4,6]  // قطريات
+];
+
+function initGame() {
+    const gameBoard = document.getElementById('board');
+    gameBoard.innerHTML = '';
+    board = ['','','','','','','','',''];
+    gameActive = true;
+    currentPlayer = 'X';
+    document.getElementById('status').textContent = 'دور اللاعب X';
+    
+    for(let i = 0; i < 9; i++) {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        cell.dataset.index = i;
+        cell.addEventListener('click', handleCellClick);
+        gameBoard.appendChild(cell);
+    }
+}
+
+function setGameMode(mode) {
+    gameMode = mode;
+    initGame();
+}
+
+function setDifficulty(level) {
+    difficulty = level;
+    initGame();
+}
+
+function handleCellClick(e) {
+    const index = e.target.dataset.index;
+    
+    if(!gameActive || board[index] !== '') return;
+    
+    makeMove(index, currentPlayer);
+    
+    if(gameMode === 'computer' && gameActive) {
+        setTimeout(computerTurn, 500);
+    }
+}
+
+function makeMove(index, player) {
+    board[index] = player;
+    document.querySelector(`[data-index="${index}"]`).textContent = player;
+    
+    if(checkWinner(player)) {
+        document.getElementById('status').textContent = `${player} فاز!`;
+        gameActive = false;
+        setTimeout(initGame, 2000);
+    } else if(board.every(cell => cell !== '')) {
+        document.getElementById('status').textContent = 'تعادل!';
+        gameActive = false;
+        setTimeout(initGame, 2000);
+    } else {
+        currentPlayer = player === 'X' ? 'O' : 'X';
+        document.getElementById('status').textContent = `دور اللاعب ${currentPlayer}`;
+    }
+}
+
+function checkWinner(player) {
+    return winPatterns.some(pattern => {
+        return pattern.every(index => board[index] === player);
+    });
+}
+
+function computerTurn() {
+    if(!gameActive) return;
+
+    let moveIndex;
+    switch(difficulty) {
+        case 'easy':
+            moveIndex = randomMove();
+            break;
+        case 'medium':
+            moveIndex = mediumMove();
+            break;
+        case 'hard':
+            moveIndex = hardMove();
+            break;
+    }
+
+    if(moveIndex !== undefined) {
+        makeMove(moveIndex, 'O');
+    }
+}
+
+function randomMove() {
+    const emptyCells = board.reduce((acc, val, idx) => 
+        val === '' ? [...acc, idx] : acc, []);
+    return emptyCells[Math.floor(Math.random() * emptyCells.length)];
+}
+
+function mediumMove() {
+    // محاولة منع الفوز أو إكمال صف
+    for(let pattern of winPatterns) {
+        const [a, b, c] = pattern;
+        if(board[a] === board[b] && board[a] !== '' && board[c] === '') 
+            return c;
+        if(board[a] === board[c] && board[a] !== '' && board[b] === '') 
+            return b;
+        if(board[b] === board[c] && board[b] !== '' && board[a] === '') 
+            return a;
+    }
+    return randomMove();
+}
+
+function hardMove() {
+    let bestScore = -Infinity;
+    let moveIndex;
+
+    for(let i = 0; i < board.length; i++) {
+        if(board[i] === '') {
+            board[i] = 'O';
+            let score = minimax(board, 0, false);
+            board[i] = '';
+            
+            if(score > bestScore) {
+                bestScore = score;
+                moveIndex = i;
+            }
+        }
+    }
+
+    return moveIndex;
+}
+
+function minimax(board, depth, isMaximizing) {
+    const scores = { 'O': 10, 'X': -10, 'draw': 0 };
+    
+    let result = checkGameState();
+    if (result !== null) {
+        return scores[result];
+    }
+
+    if (isMaximizing) {
+        let bestScore = -Infinity;
+        for (let i = 0; i < board.length; i++) {
+            if (board[i] === '') {
+                board[i] = 'O';
+                let score = minimax(board, depth + 1, false);
+                board[i] = '';
+                bestScore = Math.max(score, bestScore);
+            }
+        }
+        return bestScore;
+    } else {
+        let bestScore = Infinity;
+        for (let i = 0; i < board.length; i++) {
+            if (board[i] === '') {
+                board[i] = 'X';
+                let score = minimax(board, depth + 1, true);
+                board[i] = '';
+                bestScore = Math.min(score, bestScore);
+            }
+        }
+        return bestScore;
+    }
+}
+
+function checkGameState() {
+    for (let player of ['X', 'O']) {
+        if (winPatterns.some(pattern => 
+            pattern.every(index => board[index] === player))) {
+            return player;
+        }
+    }
+    
+    if (board.every(cell => cell !== '')) {
+        return 'draw';
+    }
+    
+    return null;
+}
+
+// بدء اللعبة
+initGame();
+
+// Decision Wheel Game Logic
+const wheel = document.getElementById('wheel');
+const spinBtn = document.getElementById('spin-btn');
+const resultDiv = document.getElementById('result');
+const ctx = wheel.getContext('2d');
+
+wheel.width = 700;
+wheel.height = 700;
+
+const sections = [
+    { label: 'حقيقة', color: '#FF6384' },
+    { label: 'تحدي', color: '#36A2EB' },
+    { label: 'تبديل', color: '#FFCE56' },
+    { label: 'إعادة المحاولة', color: '#4BC0C0' }
+];
+
+let currentRotation = 0;
+
+function drawWheel() {
+    const centerX = wheel.width / 2;
+    const centerY = wheel.height / 2;
+    const radius = wheel.width / 2;
+    const sectionAngle = (Math.PI * 2) / sections.length;
+
+    ctx.clearRect(0, 0, wheel.width, wheel.height);
+
+    sections.forEach((section, index) => {
+        const startAngle = index * sectionAngle;
+        const endAngle = (index + 1) * sectionAngle;
+
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+        ctx.closePath();
+
+        ctx.fillStyle = section.color;
+        ctx.fill();
+
+        ctx.save();
+        ctx.translate(centerX, centerY);
+        ctx.rotate(startAngle + sectionAngle / 2);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 24px Arial';
+        ctx.fillText(section.label, radius - 50, 10);
+        ctx.restore();
+    });
+}
+
+function spin() {
+    spinBtn.disabled = true;
+
+    const fullRotations = Math.floor(Math.random() * 3) + 3;
+    const randomAngle = Math.floor(Math.random() * 360);
+
+    currentRotation += (fullRotations * 360) + randomAngle;
+
+    wheel.style.transform = `rotate(${currentRotation}deg)`;
+
+    setTimeout(() => {
+        const totalSections = sections.length;
+        const degreesPerSection = 360 / totalSections;
+
+        const normalizedRotation = currentRotation % 360;
+        const sectionIndex = Math.floor((360 - normalizedRotation) / degreesPerSection);
+
+        const selectedSection = sections[sectionIndex];
+
+        const sectionMessages = {
+            'حقيقة': 'سمعنا الفضايح 😂🤫',
+            'تحدي': 'No risk no fun 😂😈',
+            'تبديل': 'يا نحس دورك راح عليك 😅',
+            'إعادة المحاولة': 'لف تاني بقا 😅'
+        };
+
+        const message = sectionMessages[selectedSection.label];
+
+        resultDiv.textContent = message;
+        spinBtn.disabled = false;
+    }, 5000);
+}
+
+drawWheel();
+spinBtn.addEventListener('click', spin);
