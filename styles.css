@@ -309,3 +309,98 @@ body.dark-mode th, body.dark-mode td {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* Tic-Tac-Toe Game Styles */
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 20px;
+}
+
+.cell {
+    aspect-ratio: 1;
+    background: #e9e9e9; /* لون الخلفية الرمادي */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+    color: #000; /* لون الرموز (X و O) أسود */
+}
+
+.cell:hover {
+    transform: scale(1.05);
+    background: #d9d9d9; /* لون الخلفية عند التحويم */
+}
+
+.btn {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-3px);
+}
+
+/* Decision Wheel Styles */
+#wheel-container {
+    position: relative;
+    width: 90vw;
+    max-width: 700px;
+    height: 90vw;
+    max-height: 700px;
+    margin: 0 auto;
+}
+
+#wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+#spinner {
+    position: absolute;
+    top: -7%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-top: 50px solid red;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+#spin-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 30px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 20;
+    font-size: 18px;
+}
+
+#result {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    }
