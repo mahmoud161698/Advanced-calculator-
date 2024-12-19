@@ -626,10 +626,6 @@ function spin() {
 
     wheel.style.transform = `rotate(${currentRotation}deg)`;
 
-    // إخفاء الرسالة قبل الدوران
-    resultDiv.style.display = 'none';
-
-    // تحديث الرسالة بعد انتهاء الدوران
     setTimeout(() => {
         const totalSections = sections.length;
         const degreesPerSection = 360 / totalSections;
@@ -648,12 +644,9 @@ function spin() {
 
         const message = sectionMessages[selectedSection.label];
 
-        // إظهار الرسالة وتحديثها
         resultDiv.textContent = message;
-        resultDiv.style.display = 'block'; // تأكيد ظهور الرسالة
-
         spinBtn.disabled = false;
-    }, 5000); // 5 ثوانٍ للدوران
+    }, 5000);
 }
 
 drawWheel();
