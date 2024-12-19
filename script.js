@@ -652,9 +652,6 @@ function spin() {
         resultDiv.textContent = message;
         resultDiv.style.display = 'block'; // تأكيد ظهور الرسالة
 
-        // تأكيد ظهور الرسالة باستخدام console.log
-        console.log('الرسالة المعروضة:', message);
-
         spinBtn.disabled = false;
     }, 5000); // 5 ثوانٍ للدوران
 }
