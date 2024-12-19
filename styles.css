@@ -357,9 +357,9 @@ body.dark-mode th, body.dark-mode td {
 #wheel-container {
     position: relative;
     width: 90vw;
-    max-width: 700px;
+    max-width: 500px;
     height: 90vw;
-    max-height: 700px;
+    max-height: 500px;
     margin: 0 auto;
 }
 
@@ -376,9 +376,9 @@ body.dark-mode th, body.dark-mode td {
     left: 50%;
     width: 0;
     height: 0;
-    border-left: 30px solid transparent;
-    border-right: 30px solid transparent;
-    border-top: 50px solid red;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 40px solid red;
     transform: translateX(-50%);
     z-index: 10;
 }
@@ -388,19 +388,19 @@ body.dark-mode th, body.dark-mode td {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 15px 30px;
+    padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     z-index: 20;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 #result {
     text-align: center;
     margin-top: 20px;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     }
