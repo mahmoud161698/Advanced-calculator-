@@ -356,11 +356,11 @@ body.dark-mode th, body.dark-mode td {
 /* Decision Wheel Styles */
 #wheel-container {
     position: relative;
-    width: 90vw; /* تناسب الشاشات الصغيرة */
-    max-width: 400px;
+    width: 90vw;
+    max-width: 500px;
     height: 90vw;
-    max-height: 400px;
-    margin: 0 auto 20px;
+    max-height: 500px;
+    margin: 0 auto;
 }
 
 #wheel {
@@ -372,13 +372,13 @@ body.dark-mode th, body.dark-mode td {
 
 #spinner {
     position: absolute;
-    top: -5%;
+    top: -7%;
     left: 50%;
     width: 0;
     height: 0;
-    border-left: 15px solid transparent;
-    border-right: 15px solid transparent;
-    border-top: 30px solid red;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 40px solid red;
     transform: translateX(-50%);
     z-index: 10;
 }
