@@ -573,8 +573,8 @@ const spinBtn = document.getElementById('spin-btn');
 const resultDiv = document.getElementById('result');
 const ctx = wheel.getContext('2d');
 
-wheel.width = 500;
-wheel.height = 500;
+wheel.width = 400;
+wheel.height = 400;
 
 const sections = [
     { label: 'حقيقة', color: '#FF6384' },
@@ -610,8 +610,8 @@ function drawWheel() {
         ctx.rotate(startAngle + sectionAngle / 2);
         ctx.textAlign = 'right';
         ctx.fillStyle = 'white';
-        ctx.font = 'bold 20px Arial';
-        ctx.fillText(section.label, radius - 40, 10);
+        ctx.font = 'bold 18px Arial';
+        ctx.fillText(section.label, radius - 30, 10);
         ctx.restore();
     });
 }
