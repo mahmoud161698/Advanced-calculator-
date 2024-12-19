@@ -356,11 +356,11 @@ body.dark-mode th, body.dark-mode td {
 /* Decision Wheel Styles */
 #wheel-container {
     position: relative;
-    width: 90vw;
-    max-width: 500px;
-    height: 90vw;
-    max-height: 500px;
-    margin: 0 auto;
+    width: 70vw; /* تصغير العجلة */
+    max-width: 400px;
+    height: 70vw;
+    max-height: 400px;
+    margin: 0 auto 20px; /* إزاحة لليمين قليلاً */
 }
 
 #wheel {
@@ -372,13 +372,13 @@ body.dark-mode th, body.dark-mode td {
 
 #spinner {
     position: absolute;
-    top: -7%;
+    top: -5%; /* تصغير السهم */
     left: 50%;
     width: 0;
     height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 40px solid red;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 30px solid red;
     transform: translateX(-50%);
     z-index: 10;
 }
@@ -403,4 +403,5 @@ body.dark-mode th, body.dark-mode td {
     margin-top: 20px;
     font-size: 20px;
     font-weight: bold;
+    color: #fff; /* تأكيد ظهور النص باللون الأبيض */
     }
