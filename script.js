@@ -644,7 +644,10 @@ function spin() {
 
         const message = sectionMessages[selectedSection.label];
 
+        // تحديث الرسالة في العنصر #result
         resultDiv.textContent = message;
+        resultDiv.style.display = 'block'; // تأكيد ظهور الرسالة
+
         spinBtn.disabled = false;
     }, 5000);
 }
